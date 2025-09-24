@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Authentic India Tours</title>
+<style>
+  body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f5f5f5; scroll-behavior: smooth;}
+  header { background:#ff6f61; color:white; padding:30px 20px; text-align:center; }
+  header h1 { margin:0; font-size:2.2em; }
+  header p { font-size:1.2em; margin-top:10px; }
+  .cta { background:#ffb347; color:white; padding:15px 25px; border:none; cursor:pointer; font-size:1em; margin-top:20px; border-radius:5px;}
+  section { padding:50px 20px; text-align:center; }
+  .features { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; max-width:1000px; margin:0 auto; }
+  .feature { background:white; padding:20px; border-radius:10px; box-shadow:0 2px 5px rgba(0,0,0,0.1); transition: transform 0.3s; }
+  .feature:hover { transform: translateY(-5px); }
+  footer { background:#333; color:white; padding:20px; text-align:center; }
+  footer a { color:#ffb347; text-decoration:none; }
+  input, select { padding:10px; font-size:1em; margin:10px 0; width:200px; }
+  #totalPrice { font-weight:bold; margin-top:10px; display:block; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Explore India Like a Local</h1>
+  <p>Curated cultural and local experiences for authentic travel</p>
+  <button class="cta" id="bookNowBtn">Book Now</button>
+</header>
+
+<section>
+  <h2>Why Choose Us?</h2>
+  <p>Discover hidden gems, connect with local artisans, and experience culture firsthand. Safe, affordable, and unforgettable journeys await.</p>
+</section>
+
+<section>
+  <h2>Our Key Experiences</h2>
+  <div class="features">
+    <div class="feature">
+      <h3>Food Trails</h3>
+      <p>Explore authentic local cuisines guided by food experts.</p>
+    </div>
+    <div class="feature">
+      <h3>Cultural Workshops</h3>
+      <p>Learn traditional crafts and skills from local artisans.</p>
+    </div>
+    <div class="feature">
+      <h3>Festivals & Events</h3>
+      <p>Participate in folk festivals and community celebrations.</p>
+    </div>
+    <div class="feature">
+      <h3>Hidden Destinations</h3>
+      <p>Visit offbeat places that mainstream tourism misses.</p>
+    </div>
+  </div>
+</section>
+
+<section id="book">
+  <h2>Ready for Your Next Adventure?</h2>
+  <p>Bookings start at just ₹2,800 per experience. Connect with authentic local hosts today!</p>
+  
+  <!-- Booking Form -->
+  <form id="bookingForm">
+    <label for="experience">Select Experience:</label><br>
+    <select id="experience">
+      <option value="2800">Food Trails - ₹2,800</option>
+      <option value="3000">Cultural Workshops - ₹3,000</option>
+      <option value="3200">Festivals & Events - ₹3,200</option>
+      <option value="3500">Hidden Destinations - ₹3,500</option>
+    </select><br>
+    
+    <label for="quantity">Number of People:</label><br>
+    <input type="number" id="quantity" value="1" min="1"><br>
+    
+    <span id="totalPrice">Total: ₹2,800</span><br>
+    
+    <button type="submit" class="cta">Book Now</button>
+  </form>
+</section>
+
+<footer>
+  <p>© 2025 Authentic India Tours | <a href="mailto:info@authenticindiatours.com">Contact Us</a></p>
+</footer>
+
+<script>
+  // Smooth scroll
+  document.getElementById("bookNowBtn").addEventListener("click", function() {
+    document.getElementById("book").scrollIntoView({ behavior: 'smooth' });
+  });
+
+  // Dynamic greeting
+  const headerP = document.querySelector("header p");
+  const hour = new Date().getHours();
+  if(hour < 12) headerP.textContent = "Good Morning! Curated cultural and local experiences await you.";
+  else if(hour < 18) headerP.textContent = "Good Afternoon! Explore authentic local experiences today.";
+  else headerP.textContent = "Good Evening! Make your travel unforgettable with our curated tours.";
+
+  // Booking form calculator
+  const experience = document.getElementById("experience");
+  const quantity = document.getElementById("quantity");
+  const totalPrice = document.getElementById("totalPrice");
+  
+  function updatePrice() {
+    const pricePerUnit = Number(experience.value);
+    const qty = Number(quantity.value);
+    totalPrice.textContent = `Total: ₹${pricePerUnit * qty}`;
+  }
+
+  experience.addEventListener("change", updatePrice);
+  quantity.addEventListener("input", updatePrice);
+
+  // Form submission
+  document.getElementById("bookingForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    alert(`Thank you! Your booking for ${quantity.value} person(s) at ₹${experience.value} each is confirmed. Total: ₹${experience.value * quantity.value}`);
+  });
+</script>
+
+</body>
+</html>
